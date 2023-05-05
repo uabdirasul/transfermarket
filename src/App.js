@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import PlayerModal from "./components/PlayerModal";
 
 export default class App extends Component {
   constructor(props) {
     super();
     this.state = {
       players: [],
+      modalVisibility: false,
     };
   }
 
@@ -54,12 +56,36 @@ export default class App extends Component {
     });
   };
 
+  openModal = () => {
+    this.setState({
+      modalVisibility: true,
+    });
+  };
+
+  closeModal = () => {
+    this.setState({
+      modalVisibility: false,
+    });
+  };
+
   render() {
-    const { players } = this.state;
+    const { players, modalVisibility } = this.state;
     return (
       <div className="market">
         <div className="container">
           <h1>Transfer Market</h1>
+          <div className="row">
+            <div className="col">
+              <button className="btn btn-primary m-2" onClick={this.openModal}>
+                Add a player
+              </button>
+              {modalVisibility ? (
+                <PlayerModal closeModal={this.closeModal} />
+              ) : (
+                ""
+              )}
+            </div>
+          </div>
           <div className="row">
             <div className="col">
               <table className="table table-hover table-sm">
