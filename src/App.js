@@ -76,7 +76,7 @@ export default class App extends Component {
           <h1>Transfer Market</h1>
           <div className="row">
             <div className="col">
-              <button className="btn btn-primary m-2" onClick={this.openModal}>
+              <button className="btn btn-primary mb-1" onClick={this.openModal}>
                 Add a player
               </button>
               {modalVisibility ? (
