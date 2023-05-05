@@ -46,6 +46,14 @@ export default class App extends Component {
     });
   }
 
+  removePlayer = (index) => {
+    const players = this.state.players;
+    players.splice(index, 1);
+    this.setState({
+      players,
+    });
+  };
+
   render() {
     const { players } = this.state;
     return (
