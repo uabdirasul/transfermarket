@@ -47,9 +47,51 @@ export default class App extends Component {
   }
 
   render() {
+    const { players } = this.state;
     return (
-      <div>
-        <h1>Hey there</h1>
+      <div className="market">
+        <div className="container">
+          <h1>Transfer Market</h1>
+          <div className="row">
+            <div className="col">
+              <table className="table table-hover table-sm">
+                <thead className="table-light">
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Club</th>
+                    <th>Market</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {players.map((item, index) => (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{item.firstName}</td>
+                      <td>{item.age}</td>
+                      <td>{item.club}</td>
+                      <td>
+                        <span className="badge text-bg-primary">
+                          €{item.value}.00m
+                        </span>
+                      </td>
+                      <td>
+                        <button
+                          className="btn btn-danger btn-sm"
+                          onClick={() => this.removePlayer(index)}
+                        >
+                          Remove
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
