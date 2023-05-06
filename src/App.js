@@ -7,6 +7,7 @@ export default class App extends Component {
     this.state = {
       players: [],
       modalVisibility: false,
+      currentData: "",
     };
   }
 
@@ -68,8 +69,41 @@ export default class App extends Component {
     });
   };
 
+  changeCurrentData = (type, isInc) => {
+    const newCurrentData = this.state.currentData
+      ? this.state.currentData
+      : {
+          firstName: "none",
+          age: 0,
+          club: "none",
+          value: 0,
+        };
+
+    if (type === "age") {
+      if (isInc) {
+        newCurrentData.age++;
+      } else if (newCurrentData.age < 1) {
+        newCurrentData.age = 0;
+      } else {
+        newCurrentData.age--;
+      }
+    } else if (type === "value") {
+      if (isInc) {
+        newCurrentData.value++;
+      } else if (newCurrentData.value < 1) {
+        newCurrentData.age = 0;
+      } else {
+        newCurrentData.value--;
+      }
+    }
+
+    this.setState({
+      currentData: newCurrentData,
+    });
+  };
+
   render() {
-    const { players, modalVisibility } = this.state;
+    const { players, modalVisibility, currentData } = this.state;
     return (
       <div className="market">
         <div className="container">
@@ -80,7 +114,11 @@ export default class App extends Component {
                 Add a player
               </button>
               {modalVisibility ? (
-                <PlayerModal closeModal={this.closeModal} />
+                <PlayerModal
+                  closeModal={this.closeModal}
+                  currentData={currentData}
+                  changeCurrentData={this.changeCurrentData}
+                />
               ) : (
                 ""
               )}
