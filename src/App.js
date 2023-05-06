@@ -102,6 +102,19 @@ export default class App extends Component {
     });
   };
 
+  saveChanges = () => {
+    const { players, currentData } = this.state;
+    players.push(currentData);
+    currentData.firstName = "Player";
+    this.setState({ players, modalVisibility: false });
+  };
+
+  clearCurrentData = () => {
+    this.setState({
+      currentData: "",
+    });
+  };
+
   render() {
     const { players, modalVisibility, currentData } = this.state;
     return (
@@ -118,6 +131,8 @@ export default class App extends Component {
                   closeModal={this.closeModal}
                   currentData={currentData}
                   changeCurrentData={this.changeCurrentData}
+                  saveChanges={this.saveChanges}
+                  clearCurrentData={this.clearCurrentData}
                 />
               ) : (
                 ""
